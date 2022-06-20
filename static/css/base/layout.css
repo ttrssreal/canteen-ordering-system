@@ -1,0 +1,115 @@
+html, body {
+    height: 100%;
+    background-color: #D8E4FF;
+}
+
+body *, html * {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav {
+    background-color: #6B818C;
+    height: 10.83333%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.nav .login {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.nav .links {
+    width: calc(100% - 98px * 0.864 - 108px * 0.864 - 40px * 0.864 - 30px);
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    height: 100%;
+}
+
+.nav .links li {
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    padding-left: calc(20px * 0.864);
+    padding-right: calc(20px * 0.864);
+}
+
+.nav .links li .box {
+    width: calc(178px * 0.6);
+    height: calc(57px * 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: #6B818C; */
+    border-radius: calc(24px * 0.864);
+    text-decoration : none;
+    color : #00120B;
+    font-size: calc(25px * 0.864);
+    font-weight: bold;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.nav .auth li .box {
+    width: calc(178px * 0.6);
+    height: calc(47px * 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: calc(24px * 0.864);
+    text-decoration : none;
+    color : #D8E4FF;
+    font-size: calc(25px * 0.864);
+    font-weight: bold;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.nav .auth li .login {
+    background-color: #00120b3d;
+}
+
+.nav .auth li .signup {
+    background-color: #00120b;
+}
+
+.nav .home {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: calc(20px * 0.864);
+    padding-right: calc(20px * 0.864);
+}
+
+.nav .auth {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: calc(20px * 0.864);
+    padding-right: calc(20px * 0.864);
+}
+
+.nav .auth * {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-left: calc(20px * 0.864);
+    padding-right: calc(20px * 0.864);
+}
+
+.nav .home img {
+    height: calc(98px * 0.864);
+}
+
+.content {
+    height: 100%;
+}

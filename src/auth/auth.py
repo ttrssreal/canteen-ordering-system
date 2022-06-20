@@ -1,5 +1,6 @@
 from flask import Blueprint
 from . import views
+from auth.auth_level import AuthLevel
 
 blueprint = Blueprint("auth", __name__, template_folder="templates")
 

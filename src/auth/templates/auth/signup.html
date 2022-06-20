@@ -1,38 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canteen - BHS</title>
-    <style>ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-      }
-      li{display: inline;}</style>
-</head>
-<body>
-    <div>
-        <ul>
-            <li><a href="/">home</a></li>
-            <li><a href="/info">info</a></li>
-            <li><a href="/order">order</a></li>
-            <li><a href="/login">login</a></li>
-        </ul>
-    </div>
-    <h1>Burnside High School - Canteen</h1>
-    <p>Signup:</p>
-    <form action="/signup" method="POST">
-        <label for="user">Username:</label>
-        <input type="text" name="user" id="user">
-        <br>
-        <label for="pwd">Password:</label>
-        <input type="password" name="pwd">
-        <br>
-        <label for="reppwd">Repeat Password:</label>
-        <input type="password" name="reppwd">
-        <button type="submit">Login</button>
-    </form>
-</body>
-</html>
+
+{% extends "base/layout.html" %}
+
+{% block head %}
+<script src="{{ url_for('static', filename='js/auth/signup.js') }}"></script>
+{% endblock head %}
+{% block content %}
+<h1>Burnside High School - Canteen</h1>
+        <p>Signup:</p>
+        <form class="form" action="/signup" method="POST">
+            <div class="fname">
+                <div class="error"></div>
+                <label for="fname">First Name:</label>
+                <input type="text" name="fname" id="fname">
+                <br>
+            </div>
+            <div class="lname">
+                <div class="error"></div>
+                <label for="lname">Last Name:</label>
+                <input type="text" name="lname" id="lname">
+                <br>
+            </div>
+            <div class="studentid">
+                <div class="error"></div>
+                <label for="studentid">BHS Student ID number:</label>
+                <input type="number" name="studentid" id="studentid">
+                <br>
+            </div>
+            <div class="pass">
+                <div class="error"></div>
+                <label for="pass">Password:</label>
+                <input type="pass" name="pass" id="pass">
+                <br>
+            </div>
+            <div class="repeat_pass">
+                <div class="error"></div>
+                <label for="repeat_pass">Repeat Password:</label>
+                <input type="pass" id="repeat_pass">
+            </div>
+            <button class="submit-button" type="button">Login</button>
+            <div class="generic">
+                <div class="error"></div>
+            </div>
+            <div class="status"></div>
+        </form>
+{% endblock content %}
