@@ -59,7 +59,7 @@ body {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.nav .auth li .box {
+.nav .auth li .box, .nav .acc {
     width: calc(178px * 0.6);
     height: calc(47px * 0.6);
     display: flex;
@@ -98,7 +98,7 @@ body {
     padding-right: calc(20px * 0.864);
 }
 
-.nav .auth * {
+.nav .auth *, .nav .acc {
     display: flex;
     align-items: center;
     height: 100%;

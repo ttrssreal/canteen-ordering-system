@@ -10,5 +10,11 @@ python3 -m venv env
 source env/bin/activate
 pip3 install -r requirements.txt
 
+A `src/.env` file is needed with the following:
+```
+DATABASE_LOCATION=sqlite://the_database_location
+SECRET=secret
+FLASK_APP=src/app.py
+```
 ## Execution
 python3 ../src/app.py

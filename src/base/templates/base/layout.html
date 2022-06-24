@@ -23,14 +23,20 @@
                 <a class="box" href="/order">Order</a>
             </li>
         </ul>
-        <ul class="auth">
-            <li>
-                <a class="login box" href="/login">Login</a>
-            </li>
-            <li>
-                <a class="signup box" href="/signup">Sign up</a>
-            </li>
-        </ul>
+        {% if session["authed"] == True %}
+            <div class="acc">
+                <a class="login box" href="/profile">{{ session["studentid"] }}↴</a>
+            </div>
+        {% else %}
+            <ul class="auth">
+                <li>
+                    <a class="login box" href="/login">Login</a>
+                </li>
+                <li>
+                    <a class="signup box" href="/signup">Sign up</a>
+                </li>
+            </ul>
+        {% endif %}
     </div>
     <div class="content">
         {% block content %}

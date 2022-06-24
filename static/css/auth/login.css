@@ -36,9 +36,8 @@
     align-items: center;
 }
 
-.content .main .submit button {
+.submit-button {
     width: calc(100px * 0.864);
-    height: calc(30px * 0.864);
     background-color : #00120B;
     border-radius: 24px;
     color: #D8E4FF;
@@ -52,8 +51,4 @@
     font-size: calc(15px * 0.864);
     font-weight: bold;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
-.content * {
-    border: 1px solid green;
 }
