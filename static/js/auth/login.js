@@ -34,7 +34,13 @@ window.onload = () => {
                         break;
                     case "success":
                         status_text.innerHTML = "Success!";
-                        window.location = "/";
+                        // go to the "next" url param after login
+                        var next = window.location.href.split("=").pop();
+                        if (window.location.href.includes("next")) {
+                            window.location = next;
+                        } else {
+                            window.location = "/";
+                        }
                 }
                 if (body.hasOwnProperty("msg")){
                     status_text.innerHTML = body["msg"];
