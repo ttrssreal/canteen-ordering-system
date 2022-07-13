@@ -1,6 +1,46 @@
 {% extends "base/layout.html" %}
+
+{% block head %}
+<script src="{{ url_for('static', filename='js/order/order.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/order/order.css') }}">
+{% endblock head %}
+
 {% block content %}
-<img src="{{ url_for('static', filename='favicon.ico') }}">
-<h1>Order food</h1>
-<p>order your food here</p>
+<div class="orders"></div>
+<main>
+    <div class="title-box">
+        <h1>New Order</h1>
+    </div>
+    <div class="form-box">
+        <div class="form-content">
+            <div class="form-elements">
+                <form>
+                    <label for="date-input">Date:</label>
+                    <input type="date" name="date" id="date-input">
+                    <label for="search-item-input">Search:</label>
+                    <div class="search-item-input">
+                        <input type="text" name="search" id="seach-box">
+                        <p>#</p>
+                        <input type="number" name="item-id" id="item-id">
+                    </div>
+                    <button>
+                        <p>Submit</p>
+                    </button>
+                </form>
+            </div>
+            <div class="add-item"></div>
+        </div>
+        <div class="item-list-box">
+            <div class="item-list-cont">
+                <div class="item-list"></div>
+                <div class="item-add">
+                    <button>
+                        <p>Add</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div class="added-items"></div>
 {% endblock content %}

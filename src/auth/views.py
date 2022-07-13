@@ -43,7 +43,7 @@ def login():
 
 def logout():
     session["authed"] = False
-    return redirect("/")
+    return redirect("/login")
 
 def signup():
     if request.method == "GET":

@@ -18,6 +18,9 @@ class CanteenDatabase():
         except sqlalchemy.exc.IntegrityError as e:
             if e.code == "gkpj":
                 return UserError.ALREADY_EXISTS
+    
+    def get_items(self, table):
+        return [ item for item in table.query.all()]
 
 class CanteenDbError(Exception):
     def __init__(self, f, *args):

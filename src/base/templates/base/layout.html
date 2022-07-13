@@ -25,6 +25,9 @@
         </ul>
         {% if session["authed"] == True %}
             <div class="acc">
+                <a class="logout box" href="/logout">Logout</a>
+            </div>
+            <div class="acc">
                 <a class="login box" href="/profile">{{ session["studentid"] }}↴</a>
             </div>
         {% else %}
