@@ -1,7 +1,3 @@
-
-import dotenv
-dotenv.load_dotenv()
-
 from flask import Flask
 
 app = Flask(__name__, static_folder="../static")
@@ -26,4 +22,4 @@ app.register_blueprint(order.blueprint)
 app.register_blueprint(user.blueprint)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
