@@ -7,15 +7,15 @@ A web-app to manage student orders at the canteen. The backend is python3 with F
 
 ### Dev environment
 
-To run a dev environment:
-`git clone git@github.com:ttrssreal/canteen-ordering-system.git`
+To run a dev environment:\
+`git clone git@github.com:ttrssreal/canteen-ordering-system.git`\
 `cd canteen-ordering-system`
 
-Make and enter a new virtual environment:
-`python3 -m venv deploy/env`
+Make and enter a new virtual environment:\
+`python3 -m venv deploy/env`\
 `source deploy/env/bin/activate`
 
-Install required python packages:
+Install required python packages:\
 `pip3 install -r requirements.txt`
 
 The following enviroment variables need to be set:
@@ -25,20 +25,20 @@ FLASK_APP=src/app.py
 SECRET=secret
 ```
 
-Then to start:
+Then to start:\
 `python3 src/app.py`
 
 ### Deploy
 
-`git clone git@github.com:ttrssreal/canteen-ordering-system.git`
+`git clone git@github.com:ttrssreal/canteen-ordering-system.git`\
 `cd canteen-ordering-system`
 
 A `.env` file is needed in the project root directory with the following contents:
 ```
-DATABASE_LOCATION=sqlite:///path_to_project_root/database/canteendb
+DATABASE_LOCATION=sqlite:////app/database/canteendb
 FLASK_APP=src/app.py
 SECRET=secret
 ```
 
-Then to launch the container:
+Then to launch the container:\
 `docker-compose up`
