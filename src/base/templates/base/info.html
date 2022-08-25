@@ -1,28 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='js/main.js') }}">
-    <title>Canteen - BHS</title>
-    <style>ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-      }
-      li{display: inline;}</style>
-</head>
-<body>
-    <div>
-        <ul>
-            <li><a href="/">home</a></li>
-            <li><a href="/info">info</a></li>
-            <li><a href="/order">order</a></li>
-            <li><a href="/login">login</a></li>
-        </ul>
-    </div>
-    <h1>Burnside High School - Canteen</h1>
-    <p>info</p>
-</body>
-</html>
+{% extends "base/layout.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base/info.css') }}">
+{% endblock head %}
+{% block content %}
+<h1>Burnside High School - Canteen</h1>
+<p>info</p>
+<p>order your food here</p>
+{% endblock content %}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    {% block head %}
+    {% endblock head %}
+    <title>Canteen - BHS</title>
+</head>
+<body>
+    <div class="nav">
+        <a class="home" href="/">
+            <img src="{{ url_for('static', filename='favicon.ico') }}">
+        </a>
+        <ul class="links">
+            <li>
+                <a class="box" href="/info">Info</a>
+            </li>
+            <li>
+                <a class="box" href="/order">Order</a>
+            </li>
+        </ul>
+        <ul class="auth">
+            <li>
+                <a class="login box" href="/login">Login</a>
+            </li>
+            <li>
+                <a class="signup box" href="/signup">Sign up</a>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        {% block content %}
+        {% endblock content %}
+    </div>
+</body>
+</html>
