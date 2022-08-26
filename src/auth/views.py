@@ -4,6 +4,8 @@ from flask import render_template, send_file, redirect, request, url_for, make_r
 import sqlalchemy, json, time, re
 from auth.auth_level import AuthLevel
 
+from auth.csrf import check_csrf, gen_csrf
+
 from user.models import User
 from db.database import canteendb, UserError
 
@@ -17,8 +19,7 @@ def login_get():
 def login_post():
     response = make_response()
     response.content_type = "application/json; charset=UTF-8"
-    if "authed" in session:
-        if session["authed"]:
+    if session.get("authed"):
             response.set_data(json.dumps({"status": "error", "msg": "Already authenticated."}))
             return response
 
@@ -35,12 +36,11 @@ def login_post():
         if user.password == creds["pass"]:
             session["studentid"] = creds["studentid"]
             session["authed"] = True
+            session["csrf_token"] = gen_csrf()
             response.set_data(json.dumps({"status": "success"}))
             return response 
     response.set_data(json.dumps({"status": "error"}))
     return response 
-
-
 
 def signup_get():
     return render_template("auth/signup.html", session=session)
@@ -79,6 +79,9 @@ def signup_post():
     response.set_data(json.dumps({"status": "success"}))
     return response
 
-def logout():
-    session["authed"] = False
-    return redirect("/login")
+@check_csrf
+def logout_post():
+    resp = make_response()
+    session.clear()
+    resp.status = 200
+    return resp

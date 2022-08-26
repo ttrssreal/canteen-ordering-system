@@ -5,7 +5,11 @@ import sqlalchemy
 
 class CanteenDatabase():
     def init(self, flask_app):
-        flask_app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["DATABASE_LOCATION"]
+        db_loc = os.environ.get("DATABASE_LOCATION")
+        if not db_loc:
+            print("ERROR: DATABASE_LOCATION environment variable is not set.")
+            quit(1)
+        flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_loc
         flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         self.db = SQLAlchemy(flask_app)
         self.migrate = Migrate(flask_app, self.db)

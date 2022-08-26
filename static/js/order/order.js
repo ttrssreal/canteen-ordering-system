@@ -32,7 +32,7 @@ window.onload = () => {
     xhr.withCredentials = true;
     xhr.open("POST", "/order");
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify({"action": "get_items"}));
+    xhr.send(JSON.stringify(add_csrf({"action": "get_items"})));
     xhr.onreadystatechange = () => {
         if(xhr.readyState == 4 && xhr.status == 200) {
             var body = JSON.parse(xhr.responseText);

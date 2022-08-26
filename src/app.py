@@ -1,9 +1,12 @@
 from flask import Flask
+import os
 
 app = Flask(__name__, static_folder="../static")
 
 # sessions
 from flask_session import Session
+key = os.environ.get("SECRET")
+app.secret_key = key if key else "secret"
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
@@ -22,4 +25,5 @@ app.register_blueprint(order.blueprint)
 app.register_blueprint(user.blueprint)
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0')
+    app.debug = True
+    app.run(host='0.0.0.0')

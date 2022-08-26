@@ -1,8 +1,10 @@
 {% extends "base/layout.html" %}
+
 {% block content %}
 <img src="{{ url_for('static', filename='favicon.ico') }}">
 <h1>Profile</h1>
 <p>Studentid: {{ studentid }}</p>
 <p>First name: {{ first_name }}</p>
 <p>Last name: {{ last_name }}</p>
+<button class="logout box" onclick="logout()">Logout</button>
 {% endblock content %}
