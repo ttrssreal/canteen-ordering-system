@@ -10,7 +10,7 @@ function logout() {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(add_csrf({})));
     localStorage.setItem("csrf", null);
-    window.location = "/login";
+    window.location = "/" + window.location.href.split("/").at(-1);
 }
 
 function add_csrf(object) {
