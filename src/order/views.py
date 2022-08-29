@@ -7,7 +7,12 @@ from auth.auth_level import AuthLevel
 import json
 
 actions = {
-    "get_items": lambda: canteendb.get_items(Product) 
+    "get_items": lambda: [{
+            "id": product.p_id,
+            "name": product.name,
+            "price": float(product.price)
+        } for product in canteendb.get_items(Product)
+    ]
 }
 
 @protected(AuthLevel.Student, redirect="order")
@@ -30,6 +35,5 @@ def order_post():
         response.set_data(json.dumps({"status": "error", "msg":"Action non-existant."}))
         return response
     action = creds["action"]
-    result = [{"id": product.p_id, "name": product.name, "price": float(product.price)} for product in actions[action]()]
-    response.set_data(json.dumps({"status": "success", "items": result}))
+    response.set_data(json.dumps({"status": "success", "result": actions[action]()}))
     return response

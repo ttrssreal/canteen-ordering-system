@@ -41,7 +41,7 @@ window.onload = () => {
                     alert("Error talking to the server. " + body["msg"])
                     break;
                 case "success":
-                    items = body["items"];
+                    items = body["result"];
                     filtered_items = items
                     refresh_list();
             }
