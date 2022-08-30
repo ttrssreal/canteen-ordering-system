@@ -36,6 +36,7 @@ def login_post():
     user = User.query.filter_by(student_id=int(creds["studentid"])).first()
     if user:
         if user.password == creds["pass"]:
+            session["s_id"] = user.s_id
             session["studentid"] = creds["studentid"]
             session["authed"] = True
             session["csrf_token"] = gen_csrf()

@@ -1,18 +1,16 @@
 from flask import render_template, send_file, request, session, make_response, redirect
-from order.models import Product
+import json, datetime, sqlalchemy
+
 from db.database import canteendb
+
 from auth.csrf import check_csrf
 from auth.routes import protected
 from auth.auth_level import AuthLevel
-import json
 
+from .actions import *
 actions = {
-    "get_items": lambda: [{
-            "id": product.p_id,
-            "name": product.name,
-            "price": float(product.price)
-        } for product in canteendb.get_items(Product)
-    ]
+    "get_items": action_get_items,
+    "new_order": action_new_order
 }
 
 @protected(AuthLevel.Student, redirect="order")
@@ -24,16 +22,17 @@ def order_get():
 def order_post():
     response = make_response()
     response.content_type = "application/json; charset=UTF-8"
-    if not session.get("authed"):
-        response.set_data(json.dumps({"status": "error", "msg":"Not authorized."}))
-        return response
-    creds = request.get_json()
-    if "action" not in creds:
+    req_json = request.get_json()
+    if "action" not in req_json:
         response.set_data(json.dumps({"status": "error", "msg":"No action."}))
         return response
-    if creds["action"] not in actions:
+    if req_json["action"] not in actions:
         response.set_data(json.dumps({"status": "error", "msg":"Action non-existant."}))
         return response
-    action = creds["action"]
-    response.set_data(json.dumps({"status": "success", "result": actions[action]()}))
+    action = req_json["action"]
+    successful, result = actions[action](req_json)
+    returned = {"status": "success" if successful else "failed"}
+    if result:
+        returned["result"] = result
+    response.set_data(json.dumps(returned))
     return response
