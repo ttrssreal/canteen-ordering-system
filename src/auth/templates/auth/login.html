@@ -14,8 +14,14 @@
         <input type="password" placeholder="Password" class="pass" name="pass">
         <p class="status"></p>
         <div class="submit">
-            <button class="submit-button" type="button">Login</button>
+            <button class="submit-button black-button" type="button">Login</button>
         </div>
     </form>
+    {% if session.get("authed") %}
+    <div class="already">
+        <p>Already authenticated.</p>
+        <button type="button" onclick="logout()">Logout?</button>
+    </div>
+    {% endif %}
 </div>
 {% endblock content %}

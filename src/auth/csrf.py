@@ -3,8 +3,8 @@ from Crypto.Hash import SHA256
 import random, time, os
 from functools import wraps
 
-sha256 = SHA256.new()
 static_value = os.environ.get("SECRET")
+sha256 = SHA256.new()
 
 # https://portswigger.net/web-security/csrf/tokens
 # https://owasp.org/www-community/attacks/csrf

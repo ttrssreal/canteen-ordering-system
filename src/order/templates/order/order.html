@@ -3,27 +3,26 @@
 {% block head %}
 <script src="{{ url_for('static', filename='js/order/order.js') }}"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/order/order.css') }}">
+<style>
+
+</style>
 {% endblock head %}
 
 {% block content %}
 <div class="orders"></div>
 <main>
     <div class="title-box">
-        <h1>New Order</h1>
+        <h1 class="title nice-text">New Order</h1>
     </div>
     <div class="form-box">
         <div class="form-content">
             <div class="form-elements">
                 <form>
-                    <label for="date-input">Date:</label>
-                    <input type="date" name="date" id="date-input">
-                    <label for="search-item-input">Search:</label>
-                    <div class="search-item-input">
-                        <input type="text" name="search" id="seach-box">
-                        <p>#</p>
-                        <input type="number" name="item-id" id="item-id">
+                    <div class="date-sect">
+                        <label class="nice-text" for="date-input">Date of order:</label>
+                        <input type="date" name="date" id="date-input">
                     </div>
-                    <button>
+                    <button class="black-button">
                         <p>Submit</p>
                     </button>
                     <div class="status-text">
@@ -36,10 +35,13 @@
         <div class="item-list-box">
             <div class="item-list-cont">
                 <div class="item-list"></div>
-                <div class="item-add">
-                    <button>
-                        <p>Add</p>
-                    </button>
+                <div class="search-item-input">
+                    <div class="name-search">
+                        <input type="text" name="search" placeholder="Search by name" id="seach-box">
+                    </div>
+                    <div class="id-search">
+                        <input type="number" name="item-id" placeholder="or ID" id="item-id">
+                    </div>
                 </div>
             </div>
         </div>

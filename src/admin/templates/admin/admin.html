@@ -1,0 +1,68 @@
+{% extends "base/layout.html" %}
+
+{% block head %}
+<script defer src="admin/admin.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin.css') }}">
+{% endblock head %}
+
+{% block content %}
+<div class="orders"></div>
+<main>
+    <div class="title-box">
+        <h1 class="nice-text">Admin</h1>
+    </div>
+    <div class="form-box">
+        <div class="form-content">
+            <div class="form-elements">
+            </div>
+            <div class="add-item"></div>
+        </div>
+        <div class="item-list-box">
+            <div class="item-list-cont">
+                <h3 class="nice-text" style="margin-bottom: 10px;">Users</h3>
+                <div class="item-list">
+                    <div class="titles">
+                        <p class="name">Name</p>
+                        <p class="sid">Student ID</p>
+                        <p class="permisions">Permission level</p>
+                    </div>
+                    {% for user in users %}
+                        <div class="searched-item">
+                            <p onclick="window.location='/profile/{{ user.id }}'" class="name">{{ user.name }}</p>
+                            <p class="sid">{{ user.sid }}</p>
+                            <p class="permisions">{{ user.permisions }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="order-display">
+                <div class="order-list-box order-box">
+                    <h3 class="nice-text">All Orders</h3>
+                    <div class="order-list-box-list">
+                        {% for order in orders %}
+                            <div class="order-list-box-list-item">
+                                <p class="order-id">{{ order.id }}</p>
+                                <p class="user-id">{{ order.s_id }}</p>
+                                <p class="order-creation-date">{{ order.cd }}</p>
+                                <p class="order-target-date">{{ order.td }}</p>
+                            </div>
+                        {% endfor %}
+                        {% if orders|length == 0 %}
+                            <p>No orders yet!</p>
+                        {% endif %}
+                    </div>
+                    
+                </div>
+                <div class="order-cont-box order-box">
+                    <div class="order-cont-box-list">
+                        <p class="nice-text">Order contents.</p>
+                        <div class="order-cont-box-list-item">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div class="added-items"></div>
+{% endblock content %}

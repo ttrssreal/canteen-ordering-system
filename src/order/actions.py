@@ -21,19 +21,45 @@ def action_get_items(req):
         return False, None
     return True, items
 
-def action_new_order(req):
-    if "items" not in req:
-        return False, None
-    if type(req["items"]) != list:
-        return False, None
-    if len(req["items"]) == 0:
-        return False, None
-    if "date" not in req:
-        return False, None
+def action_get_order(req):
     try:
+        if not session:
+            return False, None
+        if "orderid" not in req:
+            return False, None
+        if not type(req["orderid"]) == int:
+            return False, None
+        user_id_order = Order.query.filter(Order.order_id == int(req["orderid"])).first().user_id
+        if session["s_id"] != user_id_order and session.get("perms") != 3:
+            return False, None
+        order = OrderProduct.query.join(
+            Order,
+            OrderProduct.order_id == Order.order_id,
+        ).join(
+            Product,
+            OrderProduct.p_id == Product.p_id,
+        ).add_columns(
+            Product.name,
+            OrderProduct.amount
+        ).filter(
+            Order.user_id == int(session.get("s_id")),
+        ).filter(
+            Order.order_id == int(req["orderid"]),
+        ).all()
+        return True, {prod[1]: prod[2] for prod in order}
+    except:
+        return False, None
+def action_new_order(req):
+    try:
+        if "items" not in req:
+            return False, None
+        if type(req["items"]) != list:
+            return False, None
+        if len(req["items"]) == 0:
+            return False, None
+        if "date" not in req:
+            return False, None
         items = req["items"]
-        print("Request:", req)
-        print("items:", req["items"])
         order = Order(
             date_of_creation=datetime.now(),
             target_date=datetime.strptime(req["date"], "%Y-%m-%d"),

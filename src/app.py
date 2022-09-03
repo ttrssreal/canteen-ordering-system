@@ -20,11 +20,13 @@ from base import base
 from auth import auth
 from order import order
 from user import user
+from admin import admin
 
 app.register_blueprint(base.blueprint)
 app.register_blueprint(auth.blueprint)
 app.register_blueprint(order.blueprint)
 app.register_blueprint(user.blueprint)
+app.register_blueprint(admin.blueprint)
 
 if __name__ == "__main__":
     app.debug = True

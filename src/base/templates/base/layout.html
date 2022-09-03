@@ -29,7 +29,7 @@
         </ul>
         {% if session["authed"] == True %}
             <div class="acc">
-                <a class="login box" href="/profile">{{ session["studentid"] }}↴</a>
+                <a style="text-decoration: none;" class="black-button logined box" href="/profile">Profile</a>
             </div>
         {% else %}
             <ul class="auth">

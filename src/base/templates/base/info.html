@@ -3,11 +3,24 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/base/info.css') }}">
 {% endblock head %}
 {% block content %}
-<header>
-    <h1>Burnside High School - Canteen</h1>
-</header>
 <main>
-    <p>info</p>
-    <p>order your food here</p>
+    <h1 class="nice-text">Info</h1>
+    <div class="text-cont">
+        <p class="nice-text">
+            This website is designed for users/students 
+            to be able to make canteen orders ahead of time, and pay at 
+            the counter. This should increase the efficiency of the canteen 
+            reducing queue times and hopefully slowing down COVID transmision.
+        </p>
+    </div>
+    <div class="text-cont">
+        <p class="nice-text">
+            To use the site simply make an account by clicking "Create account",
+            then login and navigate to the order page, then select the items you
+            want in your order, set a date for your order and click submit. Now 
+            your order is in the system, all that is now required is to turn up
+            on the date, pay, and recive your items.
+        </p>
+    </div>
 </main>
-{% endblock content %}
+{% endblock content %}text-cont

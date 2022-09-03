@@ -40,8 +40,8 @@ body {
     text-align: center;
     display: flex;
     align-items: center;
-    padding-left: calc(20px * 0.864);
-    padding-right: calc(20px * 0.864);
+    padding-left: 17.28px;
+    padding-right: 17.28px;
 }
 
 .nav .links li .box {
@@ -85,8 +85,8 @@ body {
     height: 100%;
     display: flex;
     align-items: center;
-    padding-left: calc(20px * 0.864);
-    padding-right: calc(20px * 0.864);
+    padding-left: 17.28px;
+    padding-right: 17.28px;
 }
 
 .nav .auth {
@@ -94,16 +94,16 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-left: calc(20px * 0.864);
-    padding-right: calc(20px * 0.864);
+    padding-left: 17.28px;
+    padding-right: 17.28px;
 }
 
 .nav .auth *, .nav .acc {
     display: flex;
     align-items: center;
     height: 100%;
-    padding-left: calc(20px * 0.864);
-    padding-right: calc(20px * 0.864);
+    padding-left: 17.28px;
+    padding-right: 17.28px;
 }
 
 .nav .home img {
@@ -111,5 +111,30 @@ body {
 }
 
 .content {
-    height: 100%;
+    height: calc(100% - 10.83333%);
+}
+
+.logined {
+    height: 40px !important;
+    width: 150px !important;
+    transform: translateX(-20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scale: 1.2;
+}
+
+@media screen and (max-width: 500px) {
+    .nav > * {
+        scale: 0.80;
+    }
+    .links li {
+        width: 30px !important;
+    }
+}
+
+@media screen and (max-height: 740px) {
+    .nav {
+        height: 80.15px !important;
+    }
 }

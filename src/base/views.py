@@ -8,3 +8,9 @@ def info():
 
 def favicon():
     return send_file("../static/favicon.ico", mimetype='image/gif')
+
+def not_found(e):
+    return render_template("base/error/404.html", session=session)
+
+def server_error(e):
+    return render_template("base/error/500.html", session=session)

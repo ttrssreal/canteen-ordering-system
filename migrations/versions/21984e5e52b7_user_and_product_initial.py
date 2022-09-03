@@ -24,7 +24,6 @@ def upgrade():
         sa.PrimaryKeyConstraint('p_id')
     )
     op.create_index(op.f('ix_product_name'), 'product', ['name'], unique=False)
-    print("here")
     op.create_table('user',
         sa.Column('s_id', sa.Integer(), nullable=False),
         sa.Column('first_name', sa.String(length=32), nullable=True),

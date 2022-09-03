@@ -21,7 +21,7 @@ def login_post():
     response.content_type = "application/json; charset=UTF-8"
     if session.get("authed"):
         response.set_data(json.dumps({"status": "error", "msg": 
-            "Already authenticated. <button type=\"button\" onclick=\"logout()\">Logout?</button>"
+            "Already Authenticated."
         }))
         return response
 
@@ -37,6 +37,7 @@ def login_post():
     if user:
         if user.password == creds["pass"]:
             session["s_id"] = user.s_id
+            session["perms"] = user.permissions
             session["studentid"] = creds["studentid"]
             session["authed"] = True
             session["csrf_token"] = gen_csrf()

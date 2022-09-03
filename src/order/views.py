@@ -10,7 +10,8 @@ from auth.auth_level import AuthLevel
 from .actions import *
 actions = {
     "get_items": action_get_items,
-    "new_order": action_new_order
+    "new_order": action_new_order,
+    "get_order": action_get_order
 }
 
 @protected(AuthLevel.Student, redirect="order")

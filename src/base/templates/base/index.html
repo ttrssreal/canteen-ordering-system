@@ -1,5 +1,10 @@
 {% extends "base/layout.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base/index.css') }}">
+{% endblock head %}
 {% block content %}
-    <h1>Burnside High School - Canteen</h1>
-    <p>home</p>
+<main>
+    <h1 class="nice-text">Burnside High School - Canteen</h1>
+    <p class="nice-text">Welcome to the Burnside High School canteen ordering system.</p>
+</main>
 {% endblock content %}

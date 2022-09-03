@@ -1,10 +1,50 @@
 {% extends "base/layout.html" %}
 
+{% block head %}
+<script defer src="{{ url_for('static', filename='js/user/profile.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/user/profile.css') }}">
+{% endblock head %}
+
 {% block content %}
-<img src="{{ url_for('static', filename='favicon.ico') }}">
-<h1>Profile</h1>
-<p>Studentid: {{ studentid }}</p>
-<p>First name: {{ first_name }}</p>
-<p>Last name: {{ last_name }}</p>
-<button class="logout box" onclick="logout()">Logout</button>
+<main>
+    <div class="info">
+        <div class="top-img">
+            <img src="{{ url_for('static', filename='favicon.ico') }}">
+        </div>
+        <h1 class="nice-text pro">Profile</h1>
+        <p class="nice-text">Studentid: {{ studentid }}</p>
+        <p class="nice-text">First name: {{ first_name }}</p>
+        <p class="nice-text ln">Last name: {{ last_name }}</p>
+        {% if owns %}
+            <button class="black-button logout box" onclick="logout()">Logout</button>
+            {% if session.get("perms") == 3 %}
+                <button class="black-button admin box" onclick="window.location = '/admin'">Admin</button>
+            {% endif %}
+        {% endif %}
+    </div>
+    <div class="order-display">
+        <div class="order-list-box order-box">
+            <div class="order-list-box-list">
+                {% for order in orders %}
+                    <div class="order-list-box-list-item">
+                        <p class="order-id">{{ order.id }}</p>
+                        <p class="order-creation-date">{{ order.cd }}</p>
+                        <p class="order-target-date">{{ order.td }}</p>
+                    </div>
+                {% endfor %}
+                {% if orders|length == 0 %}
+                    <p class="nice-text">No orders yet!</p>
+                {% endif %}
+            </div>
+            
+        </div>
+        <div class="order-cont-box order-box">
+            <div class="order-cont-box-list">
+                <p class="nice-text">Order contents.</p>
+                <div class="order-cont-box-list-item">
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 {% endblock content %}

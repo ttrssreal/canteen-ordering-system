@@ -36,19 +36,27 @@
     align-items: center;
 }
 
-.submit-button {
-    width: calc(100px * 0.864);
-    background-color : #00120B;
-    border-radius: 24px;
-    color: #D8E4FF;
-    font-size: calc(15px * 0.864);
-    font-weight: bold;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
 .content .main p {
     color: #00120B;
     font-size: calc(15px * 0.864);
     font-weight: bold;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.status {
+    text-align: center;
+}
+
+.already {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 2px dotted black;
+}
+
+.already button {
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
