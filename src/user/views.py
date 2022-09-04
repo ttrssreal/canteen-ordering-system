@@ -1,4 +1,4 @@
-from flask import render_template, send_file, request, session
+from flask import render_template, send_file, request, session, redirect
 from user.models import User
 
 def profile():
