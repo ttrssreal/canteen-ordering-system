@@ -1,0 +1,173 @@
+.content {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.orders, main, .added-items {
+    height: 100%;
+}
+
+.orders {
+    width: 260px;
+    background-color: #99BED2;
+}
+
+.added-items {
+    width: 260px;
+    background-color: #99BED2;
+}
+
+main {
+    flex-grow: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+main .title-box {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main .form-box {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+main .form-box .form-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+main .form-box .form-content {
+    width: 50%;
+}
+
+main .form-box .form-content .form-elements form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main .form-box .form-content .form-elements form > *  {
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+}
+
+main .form-box .form-content .form-elements form .search-item-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+main .form-box .form-content .form-elements form .search-item-input #seach-box {
+    width: 100px;
+}
+
+main .form-box .form-content .form-elements form .search-item-input #item-id {
+    width: 40px;
+}
+
+main .form-box .form-content .form-elements form button {
+    border-radius: 4px;
+    background-color: #6B818C;
+    border-color: black;
+}
+
+main .form-box .form-content .form-elements form button p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 30px;
+    margin-right: 30px;
+    font-size: 0.8rem;
+}
+
+main .form-box .item-list-box {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main .form-box .item-list-cont {
+    width: 75%;
+    height: 88%;
+    background-color: #99BED2;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+main .form-box .item-list-cont .item-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+}
+
+main .form-box .item-list-cont .item-list:first-child {
+    margin-top: 20px;
+}
+
+main .form-box .item-list-cont .item-list .searched-item {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 75%;
+}
+
+main .form-box .item-list-cont .item-list .searched-item .name:hover {
+    background-color: #00aaff;
+}
+
+main .form-box .item-list-cont .item-list .searched-item .name {
+    flex-grow: 3;
+    background-color: #6B818C;
+    height: 100%;
+    text-align: center;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main .form-box .item-list-cont .item-list .searched-item .price {
+    flex-grow: 1;
+    background-color: #6B818C;
+    height: 100%;
+    text-align: center;
+    margin-left: 5px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main .form-box .item-list-cont .item-add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+}
+
+main .form-box .item-list-cont .item-add button {
+    border-radius: 4px;
+    background-color: #6B818C;
+    border-color: black;
+}
+
+main .form-box .item-list-cont .item-add button p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
+    font-size: 1.5rem;
+}
