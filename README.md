@@ -1,20 +1,44 @@
 # Burnside High School - Canteen Ordering System
 
+### This is a school project.
 
-## Execution enviroment
-requirements - python3, git
+### Description
+A web-app to manage student orders at the canteen. The backend is python3 with Flask, SQLAlchemy, SQLite etc.
 
-git clone https://github.com/ttrssreal/canteen-ordering-system.git
-cd canteen-ordering-system/deploy
-python3 -m venv env
-source env/bin/activate
-pip3 install -r requirements.txt
+### Dev environment
 
-A `src/.env` file is needed with the following:
+To run a dev environment:
+`git clone git@github.com:ttrssreal/canteen-ordering-system.git`
+`cd canteen-ordering-system`
+
+Make and enter a new virtual environment:
+`python3 -m venv deploy/env`
+`source deploy/env/bin/activate`
+
+Install required python packages:
+`pip3 install -r requirements.txt`
+
+The following enviroment variables need to be set:
 ```
-DATABASE_LOCATION=sqlite://the_database_location
-SECRET=secret
+DATABASE_LOCATION=sqlite:///path_to_project_root/database/canteendb
 FLASK_APP=src/app.py
+SECRET=secret
 ```
-## Execution
-python3 ../src/app.py
+
+Then to start:
+`python3 src/app.py`
+
+### Deploy
+
+`git clone git@github.com:ttrssreal/canteen-ordering-system.git`
+`cd canteen-ordering-system`
+
+A `.env` file is needed in the project root directory with the following contents:
+```
+DATABASE_LOCATION=sqlite:///path_to_project_root/database/canteendb
+FLASK_APP=src/app.py
+SECRET=secret
+```
+
+Then to launch the container:
+`docker-compose up`

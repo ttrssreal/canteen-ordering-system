@@ -1,0 +1,14 @@
+version: "3"
+services:
+  web:
+    build:
+      context: "."
+      args:
+        FLASK_APP: "$FLASK_APP"
+        DATABASE_LOCATION: "$DATABASE_LOCATION"
+    ports:
+      - "9999:5000"
+    environment:
+      - "DATABASE_LOCATION=$DATABASE_LOCATION"
+      - "SECRET=$SECRET"
+      - "FLASK_APP=$FLASK_APP"
