@@ -1,7 +1,7 @@
 from flask import render_template, send_file, request, session, redirect
 from user.models import User
 
-def profile():
+def profile_get():
     if not session.get("authed"):
         return redirect("/login?next=profile")
     user = User.query.filter_by(student_id=int(session["studentid"])).first()
