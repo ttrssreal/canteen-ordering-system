@@ -16,7 +16,7 @@ Make and enter a new virtual environment:\
 `source deploy/env/bin/activate`
 
 Install required python packages:\
-`pip3 install -r requirements.txt`
+`pip3 install -r deploy/requirements.txt`
 
 The following enviroment variables need to be set:
 ```
@@ -24,6 +24,9 @@ DATABASE_LOCATION=sqlite:///path_to_project_root/database/canteendb
 FLASK_APP=src/app.py
 SECRET=secret
 ```
+
+To run database migrations:\
+`flask db upgrade`
 
 Then to start:\
 `python3 src/app.py`
