@@ -1,0 +1,60 @@
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content main {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.content main form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.content main form > * {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    width: 100%;
+}
+
+.submit-button {
+    margin-left: 10px;
+    padding: 10px;
+}
+
+.content main p:not(.error) {
+    padding: 10px;
+    color: #00120B;
+    font-size: calc(15px * 0.864);
+    font-weight: bold;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.content main input {
+    padding: 10px;
+    width: 100%;
+}
+
+.error {
+    border-radius: 8px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.error > * {
+    margin-left: 8px;
+}
+
+.arrow {
+    width: 25px;
+}

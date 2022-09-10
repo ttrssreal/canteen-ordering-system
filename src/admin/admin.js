@@ -1,11 +1,15 @@
+// where to append elements too
 var item_list_element = document.querySelector(".order-cont-box-list");
-    
+
+// when and order is clicked
 function on_click_item(ev) {
+    // go up and down to the order-id element and parse the innerHTML
     let orderid = parseInt(ev.target.parentElement.getElementsByClassName("order-id")[0].innerText, 10);
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
     xhr.open("POST", "/order");
     xhr.setRequestHeader("Content-Type", "application/json");
+    // request the clicked orders contents
     xhr.send(JSON.stringify(add_csrf({"action": "get_order", "orderid": orderid})));
     xhr.onreadystatechange = () => {
         if(xhr.readyState == 4 && xhr.status == 200) {
@@ -32,11 +36,15 @@ Array.from(document.getElementsByClassName("order-target-date"))
 .forEach(item => item.addEventListener("click", on_click_item));
         
 function refresh_list(obj) {
+    // clear the list
     item_list_element.innerHTML = "";
     let list = [];
+    // change the format, easier to parse
     Object.entries(obj).forEach(kv => {
         list.push(kv);
     });
+    // construct each element w/ classes etc and
+    // add them to the item list in the DOM
     list.forEach(item => {
         let div = document.createElement("div");
         div.className = "order-cont-box-list-item";
@@ -48,6 +56,7 @@ function refresh_list(obj) {
         amount.innerHTML = item[1];
         div.append(product);
         div.append(amount);
+        // Add to the DOM
         item_list_element.append(div);
     });
 }

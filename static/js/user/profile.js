@@ -1,7 +1,12 @@
 var item_list_element = document.querySelector(".order-cont-box-list");
     
 function on_click_item(ev) {
+    // gets the contents of an order and adds it to the DOM
+
+    // essentially gets the order-id of the order clicked
     let orderid = parseInt(ev.target.parentElement.getElementsByClassName("order-id")[0].innerText, 10);
+
+    // then requests the contents from the server
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
     xhr.open("POST", "/order");
@@ -22,6 +27,7 @@ function on_click_item(ev) {
     }
 }
 
+// apply the handler to all the parts of the order
 Array.from(document.getElementsByClassName("order-id"))
 .forEach(item => item.addEventListener("click", on_click_item));
 Array.from(document.getElementsByClassName("order-creation-date"))
@@ -30,6 +36,8 @@ Array.from(document.getElementsByClassName("order-target-date"))
 .forEach(item => item.addEventListener("click", on_click_item));
         
 function refresh_list(obj) {
+    // same as other refresh list functions but
+    // converts from JS object to array to loop over 
     item_list_element.innerHTML = "";
     let list = [];
     Object.entries(obj).forEach(kv => {

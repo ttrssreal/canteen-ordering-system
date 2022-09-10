@@ -1,5 +1,3 @@
-# PROBABLY VULN TO CSRF, dosent validate csrf token
-
 from flask import render_template, send_file, redirect, request, url_for, make_response, session
 import sqlalchemy, json, time, re
 from auth.auth_level import AuthLevel
@@ -9,17 +7,33 @@ from auth.csrf import check_csrf, gen_csrf
 from user.models import User
 from db.database import canteendb, UserError
 
+# These regex's are for verifying the server input.
+# This is done on the client as well only for speed,
+# as we can trust the client.
+
+# One or more ascii or unicode characters to support more diverse names.
 name_test_regex = r"^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$"
+# A string with 5 digits
 student_id_regex = r"^\d{5}$"
+# Must contain at least one digit, lowercase, uppercase and special
+# character anywhere in the string, providing the string is between 7 and 30 characters.
+# This closely adheres to the governments suggested password requirements
 password_regex = r"^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{7,30})$"
 
 def login_get():
     return render_template("auth/login.html", session=session)
 
+# Authenticates the user asynchronously on the frontend
 def login_post():
+    """
+    This route will return a json HTTP response with a status value
+    either success or error
+    """
     response = make_response()
+    # set mime type
     response.content_type = "application/json; charset=UTF-8"
     if session.get("authed"):
+        # instruct the client to set the "msg" elements value.
         response.set_data(json.dumps({"status": "error", "msg": 
             "Already Authenticated."
         }))
@@ -33,6 +47,7 @@ def login_post():
         response.set_data(json.dumps({"status": "error"}))
         return response
 
+    # Get the users details from the database
     user = User.query.filter_by(student_id=int(creds["studentid"])).first()
     if user:
         if user.password == creds["pass"]:
@@ -40,6 +55,7 @@ def login_post():
             session["perms"] = user.permissions
             session["studentid"] = creds["studentid"]
             session["authed"] = True
+            # set a new server side anti-csrf token
             session["csrf_token"] = gen_csrf()
             response.set_data(json.dumps({"status": "success"}))
             return response 
@@ -50,6 +66,7 @@ def signup_get():
     return render_template("auth/signup.html", session=session)
     
 def signup_post():
+    """Verifys and inserts new users into the database."""
     response = make_response()
     response.content_type = "application/json; charset=UTF-8"
     creds = request.json
@@ -58,6 +75,7 @@ def signup_post():
         response.set_data(json.dumps({"status": "error"}))
         return response
     # stop the haxors
+    # match appropriate regex's described above against corrosponding user supplied values.
     if not re.match(name_test_regex, creds["fname"]) or not re.match(name_test_regex, creds["lname"]):
         response.set_data(json.dumps({"status": "error"}))
         return response
@@ -68,6 +86,7 @@ def signup_post():
         response.set_data(json.dumps({"status": "error"}))
         return response
     
+    # prepare the user item
     u = User(
         first_name=creds["fname"],
         last_name=creds["lname"],
@@ -75,6 +94,7 @@ def signup_post():
         password=creds["pass"]
     )
 
+    # use the static database util class to insert the single item
     if canteendb.add_rows([u]) == UserError.ALREADY_EXISTS:
         response.set_data(json.dumps({"status": "error", "generic": "User already exists"}))
         return response
@@ -83,8 +103,10 @@ def signup_post():
     response.set_data(json.dumps({"status": "success"}))
     return response
 
+# Check csrf is good to have so users can't be logged out by third parties
 @check_csrf
 def logout_post():
+    """Clears the users session data and logs them out"""
     resp = make_response()
     session.clear()
     resp.status = 200

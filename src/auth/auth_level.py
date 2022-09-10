@@ -1,5 +1,6 @@
 from enum import Enum
 class AuthLevel(Enum):
+    """Used to map the permision integers in the database to an authentication level"""
     Student = 0,
     Teacher = 1,
     Admin = 3
@@ -20,5 +21,6 @@ def str_auth_level(auth_level: int):
         case 1: return "Teacher"
         case 3: return "Admin"
 
+# just a comparison
 def check_auth_level(required: AuthLevel, auth_level: int):
     return auth_level >= AuthLevel.to_int(required)

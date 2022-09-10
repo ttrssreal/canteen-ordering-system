@@ -1,9 +1,9 @@
 window.onload = () => {
-    // TODO: write good code
     var items = null;
     var curr_items = []
     var filtered_items = null;
     var total_price = 0;
+    // define all references to elements etc.
     var search_element = document.getElementById("seach-box");
     var item_id_element = document.getElementById("item-id");
     var form = document.querySelector(".form-elements form");
@@ -13,28 +13,37 @@ window.onload = () => {
     var item_list_element = document.querySelector(".item-list");
     var order_items_element = document.querySelector(".added-items .items");
     var total_price_element = document.querySelector(".added-items .total .price");
-    new_order
+    
     search_element.onkeyup = ev => {
+        // when the user lifts their finger the search will run
         var searched = search_element.value;
         refresh_list(items.filter(item => { return item.name.includes(searched.toLowerCase()) }));
     }
     item_id_element.onchange = ev => {
+        // search by the id value
         var searched = item_id_element.value;
         refresh_list(items.filter(item => { return item.id.toString() == searched }));
     }
     window.onkeydown = ev => {
+        // prevent the enter key to submit the form
         if(ev.keyCode == 13) {
             ev.preventDefault();
             return false;
         }
     }
+
+    // apply the handler
     submit_button.onclick = new_order;
 
     function on_click_item(ev) {
+        // when an item is selected it is added to the cart and the price is incremented
         let event_item = ev.target.parentElement;
+        // parse the price of the item
         total_price += parseFloat(event_item.getElementsByClassName("price")[0].innerText.replace("$", ""), 10)
+        // search for p_id
         let product_id = items.filter(item => { return item.name == event_item.getElementsByClassName("name")[0].innerText })[0].id;
         curr_items.push({"p_id": product_id.toString()});
+        // update the price
         total_price_element.innerText = "$" + total_price.toFixed(2).toString();
         add_to_order_items(event_item.cloneNode(true));
     }
@@ -44,11 +53,8 @@ window.onload = () => {
         order_items_element.append(item);
     }
 
-    function remove_from_order_items(item) {
-        
-    }
-
     function refresh_list(list) {
+        // same function from profile
         item_list_element.innerHTML = "";
         list.forEach(item => {
             let div = document.createElement("div");
@@ -68,9 +74,11 @@ window.onload = () => {
 
     function new_order(ev) {
         ev.preventDefault();
-        console.log(curr_items);
         var final_list = [];
         var count_uniq = {};
+        
+        // This code takes a list of different items with
+        // repeats, counts the number of repeats and puts that into a JS oject
         curr_items.forEach(el => {
             el = el["p_id"]
             if (Object.keys(count_uniq).includes(el)) {
@@ -82,6 +90,8 @@ window.onload = () => {
         Object.keys(count_uniq).forEach(el => {
             final_list.push({"p_id": parseInt(el, 10), "amount": count_uniq[el]});
         });
+
+        // require a date
         if (date_input.value == "") {
             status_text_element.style = "color: red;";
             status_text_element.innerText = "Please provide a date for your order.";
@@ -91,6 +101,7 @@ window.onload = () => {
         xhr.withCredentials = true;
         xhr.open("POST", "/order");
         xhr.setRequestHeader("Content-Type", "application/json");
+        // send reuest
         xhr.send(JSON.stringify(add_csrf({"action": "new_order", "date": date_input.value, "items": final_list})));
         xhr.onreadystatechange = () => {
             if(xhr.readyState == 4 && xhr.status == 200) {
@@ -101,10 +112,12 @@ window.onload = () => {
                         status_text_element.innerText = "Couldn't fulfil order.";
                         break;
                     case "success":
+                        // reset shopping cart for next order
                         order_items_element.innerHTML = "";
                         curr_items = [];
                         total_price = 0;
                         total_price_element.innerText = "$" + total_price.toFixed(2).toString();
+                        // inform the user
                         status_text_element.style = "color: green;";
                         status_text_element.innerText = "Order successfully placed!";
                 }

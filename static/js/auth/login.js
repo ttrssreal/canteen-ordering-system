@@ -7,6 +7,7 @@ window.onload = () => {
     password_field = document.querySelector(".pass")
 
     function toggle_waiting_for_response() {
+        // Informative when the network is slow
         let toggle = button.disabled != true;
         button.disabled = toggle;
         status_text.innerHTML = toggle ? "Loading..." : "";
@@ -14,6 +15,7 @@ window.onload = () => {
 
     button.onclick = () => {
         toggle_waiting_for_response();
+        // get form values
         let form = {"studentid": studentid_field.value, "pass": password_field.value}
         if (form == false) {
             toggle_waiting_for_response();
@@ -23,6 +25,7 @@ window.onload = () => {
         xhr.withCredentials = true;
         xhr.open("POST", "/login");
         xhr.setRequestHeader("Content-Type", "application/json");
+        // send request with details
         xhr.send(JSON.stringify(form));
         xhr.onreadystatechange = () => {
             if(xhr.readyState == 4 && xhr.status == 200) {
@@ -30,6 +33,7 @@ window.onload = () => {
                 var body = JSON.parse(xhr.responseText);
                 switch (body["status"]) {
                     case "error":
+                        // update user with infomation
                         status_text.innerHTML = "Invalid Credentials";
                         break;
                     case "success":
@@ -43,6 +47,7 @@ window.onload = () => {
                         }
                 }
                 if (body.hasOwnProperty("msg")){
+                    // set message if server rquests
                     status_text.innerHTML = body["msg"];
                 }
             }

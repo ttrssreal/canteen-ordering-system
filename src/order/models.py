@@ -4,6 +4,9 @@ from user.models import User
 
 db = canteendb.db
 
+# Just SQLAlchemy model definitions.
+# Each has dunder repr defined primarily for debuging purposes
+
 class Product(db.Model):
     p_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), index=True)
@@ -16,6 +19,7 @@ class Order(db.Model):
     order_id = db.Column(db.Integer, primary_key=True)
     date_of_creation = db.Column(db.DateTime)
     target_date = db.Column(db.DateTime)
+    # SQLalchemy foreign key definitions
     user = db.relationship("User")
     user_id = db.Column(db.Integer, db.ForeignKey(User.s_id))
 

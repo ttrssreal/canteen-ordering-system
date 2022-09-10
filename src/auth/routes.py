@@ -20,6 +20,7 @@ def protected(auth_level: AuthLevel, redirect:str=None, send_unauthorized=False)
     def check_login(view):
         @wraps(view)
         def func(*args, **kwargs):
+            # Use the settings
             if redirect and not send_unauthorized:
                 unauth_resp = flask_redirect("/login?next=" + redirect)
             elif not send_unauthorized:
@@ -33,6 +34,7 @@ def protected(auth_level: AuthLevel, redirect:str=None, send_unauthorized=False)
                 return unauth_resp
             # in case we change permissions, we don't save in the session
             user = User.query.filter_by(student_id=int(s_id)).first()
+            # just a fancy int comparison
             if not check_auth_level(auth_level, user.permissions):
                 return unauth_resp
             return view(*args, **kwargs)

@@ -4,6 +4,7 @@ def index():
     return render_template("base/index.html", session=session)
 
 def info():
+    print(session)
     return render_template("base/info.html", session=session)
 
 def favicon():

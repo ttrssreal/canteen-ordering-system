@@ -1,10 +1,12 @@
 from flask import Flask
 import os
 
+# static secret used throughout
 key = os.environ.get("SECRET")
 
 app = Flask(__name__, static_folder="../static")
 
+# default to "secret"
 app.secret_key = key if key else "secret"
 
 # sessions

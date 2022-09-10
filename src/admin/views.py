@@ -13,7 +13,9 @@ from order.models import Order
 @protected(AuthLevel.Admin, redirect="admin")
 def admin_get():
     users = User.query.all()
+    # Long list comprehension
     orders = [
+        # renders data to a python dictionary in a form the front-end can understand
         {
             "id": prod[1],
             "s_id": prod[4],
@@ -21,12 +23,14 @@ def admin_get():
             "td": "{}/{}/{} {}:{}".format(prod[3].day, prod[3].month, prod[3].year, prod[3].hour, prod[3].second)
         }
         for prod in Order.query.add_columns(
+                        # gets the following infomation
                         Order.order_id,
                         Order.date_of_creation,
                         Order.target_date,
                         Order.user_id
                     ).all()
     ]
+    # for each user make a python dictionary with specific feilds to render
     users = list(map(lambda user:
         {
             "id": user.s_id,
@@ -37,6 +41,7 @@ def admin_get():
     , users))
     return render_template("admin/admin.html", session=session, users=users, orders=orders)
 
+# As we don't want unauthorized users to access this code
 @protected(AuthLevel.Admin, send_unauthorized=True)
 def javascript():
     return send_file("admin/admin.js", mimetype='text/javascript')

@@ -3,6 +3,7 @@ from flask_migrate import Migrate
 import os
 import sqlalchemy
 
+# Util class for interfacing with the database
 class CanteenDatabase():
     def init(self, flask_app):
         db_loc = os.environ.get("DATABASE_LOCATION")
@@ -12,6 +13,7 @@ class CanteenDatabase():
         flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_loc
         flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         self.db = SQLAlchemy(flask_app)
+        # setup migrations
         self.migrate = Migrate(flask_app, self.db)
         self.db.create_all()
     
@@ -26,6 +28,8 @@ class CanteenDatabase():
     def get_items(self, table):
         return [ item for item in table.query.all()]
 
+# An attempt at makeing somthing of a custom
+# error wrapper around sqlite's
 class CanteenDbError(Exception):
     def __init__(self, f, *args):
         super().__init__(args)
@@ -38,7 +42,5 @@ class UserError(CanteenDbError):
         print(f)
     ALREADY_EXISTS = 0
 
-# class UserError(CanteenDbError):
-
-
+# The class is instantiated as a sort of global static instance
 canteendb = CanteenDatabase()
