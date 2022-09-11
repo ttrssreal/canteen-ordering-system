@@ -1,6 +1,7 @@
 from flask import session, after_this_request, request, make_response
 from Crypto.Hash import SHA256
 import random, time, os
+from functools import wraps
 
 sha256 = SHA256.new()
 static_value = os.environ.get("SECRET")
@@ -14,6 +15,7 @@ def gen_csrf():
     
 
 def check_csrf(view):
+    @wraps(view)
     def func(*args, **kwargs):
         resp = make_response()
         server_token = session.get("csrf_token")

@@ -2,21 +2,21 @@ from flask import render_template, send_file, request, session, make_response, r
 from order.models import Product
 from db.database import canteendb
 from auth.csrf import check_csrf
+from auth.routes import protected
+from auth.auth_level import AuthLevel
 import json
 
 actions = {
     "get_items": lambda: canteendb.get_items(Product) 
 }
 
+@protected(AuthLevel.Student, redirect="order")
 def order_get():
-    if not session.get("authed"):
-        return redirect("/login?next=order")
     return render_template("order/order.html", session=session)
 
 @check_csrf
+@protected(AuthLevel.Student, redirect="order")
 def order_post():
-    if not session.get("authed"):
-        return redirect("/login?next=order")
     response = make_response()
     response.content_type = "application/json; charset=UTF-8"
     if not session.get("authed"):

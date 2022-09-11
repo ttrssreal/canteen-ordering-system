@@ -20,8 +20,10 @@ def login_post():
     response = make_response()
     response.content_type = "application/json; charset=UTF-8"
     if session.get("authed"):
-            response.set_data(json.dumps({"status": "error", "msg": "Already authenticated."}))
-            return response
+        response.set_data(json.dumps({"status": "error", "msg": 
+            "Already authenticated. <button type=\"button\" onclick=\"logout()\">Logout?</button>"
+        }))
+        return response
 
     creds = request.get_json()
     if "studentid" not in creds or "pass" not in creds:
