@@ -1,6 +1,7 @@
 from flask import render_template, send_file, request, session, make_response, redirect
 from order.models import Product
 from db.database import canteendb
+from auth.csrf import check_csrf
 import json
 
 actions = {
@@ -12,7 +13,10 @@ def order_get():
         return redirect("/login?next=order")
     return render_template("order/order.html", session=session)
 
+@check_csrf
 def order_post():
+    if not session.get("authed"):
+        return redirect("/login?next=order")
     response = make_response()
     response.content_type = "application/json; charset=UTF-8"
     if not session.get("authed"):
