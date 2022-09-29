@@ -1,5 +1,5 @@
 from flask import render_template, send_file, redirect, request, url_for, make_response, session
-import sqlalchemy, json, time, re
+import sqlalchemy, json, time, re, bcrypt
 from auth.auth_level import AuthLevel
 
 from auth.csrf import check_csrf, gen_csrf
@@ -50,7 +50,7 @@ def login_post():
     # Get the users details from the database
     user = User.query.filter_by(student_id=int(creds["studentid"])).first()
     if user:
-        if user.password == creds["pass"]:
+        if bcrypt.checkpw(creds["pass"].encode("utf-8"), user.password):
             session["s_id"] = user.s_id
             session["perms"] = user.permissions
             session["studentid"] = creds["studentid"]
@@ -86,12 +86,17 @@ def signup_post():
         response.set_data(json.dumps({"status": "error"}))
         return response
     
+    encoded_password = creds["pass"].encode("utf-8")
+    hashed_password = bcrypt.hashpw(encoded_password, bcrypt.gensalt())
+
+    # aaa!2Daaa!2D
     # prepare the user item
     u = User(
         first_name=creds["fname"],
         last_name=creds["lname"],
         student_id=creds["studentid"],
-        password=creds["pass"]
+        password=hashed_password,
+        permissions=1
     )
 
     # use the static database util class to insert the single item
