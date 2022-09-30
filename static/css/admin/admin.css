@@ -24,7 +24,11 @@ main {
     flex-grow: 2;
     display: flex;
     flex-direction: column;
-    height: 1369px;
+    height: 1404px;
+}
+
+.title {
+    width: 95% !important;
 }
 
 main .title-box {

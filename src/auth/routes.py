@@ -34,6 +34,8 @@ def protected(auth_level: AuthLevel, redirect:str=None, send_unauthorized=False)
                 return unauth_resp
             # in case we change permissions, we don't save in the session
             user = User.query.filter_by(student_id=int(s_id)).first()
+            if not user:
+                return unauth_resp
             # just a fancy int comparison
             if not check_auth_level(auth_level, user.permissions):
                 return unauth_resp

@@ -59,6 +59,11 @@ main .ln {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+
+.title {
+    width: 95% !important;
 }
 
 .order-list-box-list {
@@ -77,9 +82,9 @@ main .ln {
     width: 50%;
     border-radius: 10px;
     display: flex;
-    justify-content: center;
     align-items: center;
     margin-left: 4px;
+    flex-direction: column;
 }
 
 .order-cont-box-list {

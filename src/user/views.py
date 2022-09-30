@@ -32,7 +32,8 @@ def get_orders_by_user(userid):
 @protected(AuthLevel.Student, redirect="profile")
 def profile_get():
     """Route renders the users current and past orders"""
-    user = User.query.filter_by(student_id=int(session["studentid"])).first()
+    user = User.query.filter_by(student_id=int(session.get("studentid"))).first()
+    session["perms"] = user.permissions
     orders = get_orders_by_user(user.s_id)
     # the (jinja2) template just loops through the orders list and displays each
     return render_template("user/profile.html", session=session,

@@ -18,16 +18,20 @@ def admin_get():
         # renders data to a python dictionary in a form the front-end can understand
         {
             "id": prod[1],
-            "s_id": prod[4],
+            "name": prod[4] + " " + prod[5],
             "cd": "{}/{}/{} {}:{}".format(prod[2].day, prod[2].month, prod[2].year, prod[2].hour, prod[2].second),
             "td": "{}/{}/{} {}:{}".format(prod[3].day, prod[3].month, prod[3].year, prod[3].hour, prod[3].second)
         }
-        for prod in Order.query.add_columns(
+        for prod in Order.query.join(
+                        # join Order and User together to get the names of users
+                            User, User.s_id == Order.user_id
+                        ).add_columns(
                         # gets the following infomation
                         Order.order_id,
                         Order.date_of_creation,
                         Order.target_date,
-                        Order.user_id
+                        User.first_name,
+                        User.last_name
                     ).all()
     ]
     # for each user make a python dictionary with specific feilds to render

@@ -21,10 +21,11 @@
 }
 
 .added-items .items {
+    overflow-y: scroll;
     height: calc(100% - 100px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
 }
 
 .added-items .items .order-item {
@@ -35,6 +36,8 @@
     justify-content: center;
     height: 40px;
     width: 75%;
+    margin-left: calc((100% - 75%)/2);
+    margin-right: calc((100% - 75%)/2);
 }
 
 .added-items .items .order-item .name {

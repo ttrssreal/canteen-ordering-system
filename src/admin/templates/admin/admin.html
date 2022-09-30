@@ -38,11 +38,17 @@
             <div class="order-display">
                 <div class="order-list-box order-box">
                     <h3 class="nice-text">All Orders</h3>
+                    <div class="order-list-box-list-item title">
+                        <p class="nice-text order-id">ID</p>
+                        <p class="nice-text user-id">Username</p>
+                        <p class="nice-text order-creation-date">Creation Date</p>
+                        <p class="nice-text order-target-date">Target Date</p>
+                    </div>
                     <div class="order-list-box-list">
                         {% for order in orders %}
                             <div class="order-list-box-list-item">
                                 <p class="order-id">{{ order.id }}</p>
-                                <p class="user-id">{{ order.s_id }}</p>
+                                <p class="user-id">{{ order.name }}</p>
                                 <p class="order-creation-date">{{ order.cd }}</p>
                                 <p class="order-target-date">{{ order.td }}</p>
                             </div>

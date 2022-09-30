@@ -24,6 +24,11 @@
     </div>
     <div class="order-display">
         <div class="order-list-box order-box">
+            <div class="order-list-box-list-item title">
+                <p class="nice-text order-id">ID</p>
+                <p class="nice-text order-creation-date">Creation Date</p>
+                <p class="nice-text order-target-date">Target Date</p>
+            </div>
             <div class="order-list-box-list">
                 {% for order in orders %}
                     <div class="order-list-box-list-item">
@@ -39,6 +44,10 @@
             
         </div>
         <div class="order-cont-box order-box">
+            <div class="order-cont-box-list-item title">
+                <p class="nice-text order-product">Item name</p>
+                <p class="nice-text order-amount">Quantity</p>
+            </div>
             <div class="order-cont-box-list">
                 <p class="nice-text">Order contents.</p>
                 <div class="order-cont-box-list-item">
